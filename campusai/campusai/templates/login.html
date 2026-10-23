@@ -1,0 +1,12 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sign in</title><link rel="stylesheet" href="/static/styles.css"></head><body>
+<h1>Sign in</h1><input id="email" type="email" placeholder="College email"><button id="req">Send code</button>
+<input id="code" maxlength="6" inputmode="numeric" placeholder="6-digit code"><button id="ver">Verify</button><p id="msg"></p>
+<script>
+const msg=t=>document.getElementById('msg').textContent=t;
+async function post(u,b){const r=await fetch(u,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(b)});return [r.status,await r.json()]}
+req.onclick=async()=>{const [s,d]=await post('/auth/request-otp',{email:email.value});msg(d.message||d.detail)};
+ver.onclick=async()=>{let [s,d]=await post('/auth/verify',{email:email.value,code:code.value});
+ if(s==409&&confirm(d.detail)) [s,d]=await post('/auth/verify',{email:email.value,code:code.value,confirm_switch:true});
+ if(s==200){location=d.role=='student'?'/study':d.role=='faculty'?'/teacher':'/admin'}else msg(d.detail)};
+</script></body></html>

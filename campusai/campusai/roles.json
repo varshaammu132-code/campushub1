@@ -1,0 +1,9 @@
+{
+  "_comment": "Initial role seed. Replace with your real roster; domain match alone does not prove enrollment.",
+  "allowed_domain": "sjcit.ac.in",
+  "users": [
+    {"email": "admin@sjcit.ac.in", "name": "Admin", "role": "administrator"},
+    {"email": "teacher@sjcit.ac.in", "name": "Demo Teacher", "role": "faculty", "department": "CSE"},
+    {"email": "student@sjcit.ac.in", "name": "Demo Student", "student_id": "1SJ00CS000", "department": "CSE", "role": "student", "teacher": "teacher@sjcit.ac.in"}
+  ]
+}
